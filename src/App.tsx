@@ -1,9 +1,10 @@
 import React from "react";
-import "./App.css";
-import { useStockDaily } from "../utils/api/stock-api";
-import { transformStockData, type StockData } from "../utils/transform-data";
+import { useStockDaily } from "./utils/api/stock-api";
+import { transformStockData, type StockData } from "./utils/transform-data";
+import StockDetails from "./components/StockDetails";
+import Layout from "./components/Layout";
 
-function App() {
+const App: React.FC = () => {
   const { data, error, isLoading } = useStockDaily("IBM");
 
   // Use React.useMemo to memoize the transformed data
@@ -18,8 +19,13 @@ function App() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <Layout>
+      <div className="flex flex-row items-center">
+        <div className="w-6/12">
+          <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        </div>
+        <div className="w-6/12">Hi HI</div>
+      </div>
       {transformedData && (
         <div>
           <h2>Stock Data for {transformedData.metaData["2. Symbol"]}</h2>
@@ -32,8 +38,9 @@ function App() {
           </ul>
         </div>
       )}
-    </>
+      <StockDetails />
+    </Layout>
   );
-}
+};
 
 export default App;
