@@ -45,11 +45,24 @@ export function useStockQuote(stockSymbol: string) {
  * Fetches the time series of the stock
  * @param {string} stockSymbol - Symbol of the company, e.g. 'FB'
  * @returns {Promise<Object>} Response object
- * https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&outputsize=compact&apikey=RIBXT3XYLI69PC0Q
+ * https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&outputsize=compact&apikey=demo
  */
 export function useStockDaily(stockSymbol: string) {
   const url = `${basePath}/query?function=TIME_SERIES_DAILY&symbol=${stockSymbol}&outputsize=compact&apikey=${
     import.meta.env.VITE_API_KEY
   }`;
   return useSWR<object>(stockSymbol ? url : null, fetcher);
+}
+
+/**
+ * Fetches the company overview
+ * @param {string} stockSymbol - Symbol of the company, e.g. 'IBM'
+ * @returns {Object} SWR response object
+ */
+export function useStockOverview<T = unknown>(stockSymbol: string) {
+  const url = `${basePath}/query?function=OVERVIEW&symbol=${stockSymbol}&apikey=${
+    import.meta.env.VITE_API_KEY
+  }`;
+
+  return useSWR<T>(stockSymbol ? url : null, fetcher);
 }

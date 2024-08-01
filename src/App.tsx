@@ -24,7 +24,9 @@ const App: React.FC = () => {
         <div className="w-6/12">
           <h1 className="text-3xl font-bold underline">Hello world!</h1>
         </div>
-        <div className="w-6/12">Hi HI</div>
+        <div className="w-6/12">
+          <StockDetails />
+        </div>
       </div>
       {transformedData && (
         <div>

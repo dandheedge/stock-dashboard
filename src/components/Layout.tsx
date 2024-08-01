@@ -7,8 +7,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex items-center min-h-screen bg-gray-100">
-      <div className="w-full h-screen bg-white shadow-lg">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="max-w-[1280px] w-full max-h-screen overflow-auto bg-white shadow-lg">
         <main className="p-4">{children}</main>
       </div>
     </div>
