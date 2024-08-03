@@ -26,6 +26,12 @@ interface TransformedData {
   volume: number;
 }
 
+/**
+ * Transform object data returned from Alphavantage to array
+ * and limited only 20 data
+ * @param data
+ * @returns Array
+ */
 export function transformStockData(data: StockData): {
   metaData: StockData["Meta Data"];
   timeSeries: TransformedData[];
@@ -43,9 +49,9 @@ export function transformStockData(data: StockData): {
   );
 
   // Sort the time series by date in descending order (most recent first)
-  timeSeries.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  timeSeries
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 20);
 
   return { metaData, timeSeries };
 }
